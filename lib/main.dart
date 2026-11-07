@@ -1,78 +1,26 @@
+// Lab Exercise 4.1, Slide 88: main.dart registers the four named routes (Pizza Store app)
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const RestaurantMenuApp());
-}
+import 'cheese_pizza.dart';
+import 'fries.dart';
+import 'menu.dart';
+import 'vegetable_pizza.dart';
 
-class RestaurantMenuApp extends StatelessWidget {
-  const RestaurantMenuApp({super.key});
+void main() => runApp(const Lab04());
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Restaurant Menu',
-      debugShowCheckedModeBanner: false,
-      home: MenuScreen(),
-    );
-  }
-}
-
-class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key});
+class Lab04 extends StatelessWidget {
+  const Lab04({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Pizza Place Menu',
-          style: TextStyle(color: Colors.white, fontFamily: 'Pacifico'),
-        ),
-        backgroundColor: Colors.deepOrange,
-      ),
-      body: const SafeArea(
-        child: Column(
-          children: [
-            MenuCard('pizza_vegetable.png', 'Vegetable Pizza'),
-            MenuCard('pizza_mushroom.png', 'Mushroom Pizza'),
-            MenuCard('fries.png', 'Box of Fries'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MenuCard extends StatelessWidget {
-  const MenuCard(this.file, this.name, {super.key});
-
-  final String file;
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      color: Colors.orange,
-      margin: const EdgeInsets.all(12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          children: [
-            Image.asset('assets/images/$file', width: 100, height: 100),
-            const SizedBox(width: 20),
-            Text(
-              name,
-              style: const TextStyle(
-                fontSize: 30,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
+    return MaterialApp(
+      home: const MenuScreen(),
+      routes: {
+        'menu': (context) => const MenuScreen(),
+        'vegetable': (context) => const VegetablePizzaScreen(),
+        'cheese': (context) => const CheesePizzaScreen(),
+        'fries': (context) => const FriesScreen(),
+      },
     );
   }
 }
